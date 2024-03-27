@@ -1,0 +1,52 @@
+﻿@model List<Product>
+<h1>Product Manager</h1>
+
+@if (TempData.Keys.Contains("message"))
+{
+    <h4 class="bg-info text-center text-white p-2">
+        @TempData["message"]
+    </h4>
+}
+
+
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Release Date</th>
+            <th></th>
+
+        </tr>
+
+
+        @foreach (Product product in Model)
+        {
+            <tr>
+                <td>@product.ProductCode</td>
+                <td>@product.Name</td>
+                <td>@product.YearlyPrice</td>
+                <td>@product.ReleaseDate</td>
+
+                <td>
+                    <a asp-controller="Products" asp-action="Edit"
+                       asp-route-id="@product.ProductID" class="btn btn-primary">
+                        Edit
+                    </a>
+
+                </td>
+
+                <td>
+                    <a asp-controller="Products" asp-action="Delete"
+                       asp-route-id="@product.ProductID" class="btn btn-primary">
+                        Delete
+                    </a>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Products" asp-action="Add" class="btn btn-primary">Add Product</a>
