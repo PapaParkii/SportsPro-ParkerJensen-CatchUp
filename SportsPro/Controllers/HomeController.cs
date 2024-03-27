@@ -13,5 +13,10 @@ namespace SportsPro.Controllers
         {
             return View();
         }
+
+        public IActionResult ProductManager()
+        {
+            return View();
+        }
     }
 }
