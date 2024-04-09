@@ -6,27 +6,35 @@ using System.Threading;
 
 namespace SportsPro.Controllers
 {
+    // Controller for managing incidents
     public class IncidentsController : Controller
     {
+        // Database context for accessing incidents
         private SportsProContext context { get; set; }
+
+        // Constructor to initialize the database context
         public IncidentsController(SportsProContext ctx)
         {
             context = ctx;
         }
+
+        // Action to display a list of all incidents
         [Route("Incidents")]
         public ViewResult Incident()
         {
             var incidents = context.Incidents.ToList();
             return View(incidents);
-
         }
 
+        // Action to display the form for adding a new incident
         [HttpGet]
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
             return View("Edit", new Incident());
         }
+
+        // Action to display the form for editing an existing incident
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -34,6 +42,8 @@ namespace SportsPro.Controllers
             var incident = context.Incidents.Find(id);
             return View(incident);
         }
+
+        // Action to handle the submission of the incident edit form
         [HttpPost]
         public IActionResult Edit(Incident incident)
         {
@@ -52,12 +62,16 @@ namespace SportsPro.Controllers
                 return View(incident);
             }
         }
+
+        // Action to display the form for confirming the deletion of an incident
         [HttpGet]
         public IActionResult Delete(int id)
         {
             var incident = context.Incidents.Find(id);
             return View(incident);
         }
+
+        // Action to handle the deletion of an incident
         [HttpPost]
         public IActionResult Delete(Incident incident)
         {
@@ -65,7 +79,5 @@ namespace SportsPro.Controllers
             context.SaveChanges();
             return RedirectToAction("List", incident);
         }
-
     }
 }
-
