@@ -1,0 +1,54 @@
+﻿@model List<Incident>
+@{
+    ViewBag.Title = "Incidents";
+}
+<h1>Incidents Manager</h1>
+
+<div class="containter">
+    <header class="jumbotron">
+    </header>
+
+
+
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <th>Product</th>
+                <th>Customer</th>
+                <th>Date Opened</th>
+                <th></th>
+            </tr>
+
+            @foreach (Incident incident in Model)
+            {
+                <tr>
+                    <td>@incident.Title</td>
+                    <td>@incident.Product</td>
+                    <td>@incident.Customer</td>
+                    <td>@incident.DateOpened</td>
+
+                    <td>
+                        <a asp-controller="Incident" asp-action="Edit" class="btn btn-primary"
+                           asp-route-id="@incident.IncidentID">
+                            Edit
+                        </a>
+                    </td>
+
+                    <td>
+                        <a asp-controller="Incident" asp-action="Delete" class="btn btn-primary"
+                           asp-route-id="@incident.IncidentID">
+                            Delete
+                        </a>
+
+                    </td>
+
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+<a asp-controller="Incident" class="btn btn-primary" asp-action="Add">Add Incident</a>
+</div>
